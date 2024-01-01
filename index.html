@@ -7,7 +7,7 @@
       function f_submit() {
         var order = new Order();
         order.pay_method = "";
-        order.merchant_id = "30132";
+        order.merchant_id = "19788";
         order.service_id = "001";
         order.cust_code = "Merchant_TestUser_999999";
         order.order_id = `b383940ccce-${getYYYYMMDDHHMMSS()}`;
@@ -15,12 +15,12 @@
         order.amount = "1";
         order.pay_type = "0";
         order.service_type = "0";
-        order.success_url = "http://localhost:3000";
+        order.success_url = "https://sbpayment.vercel.app/success";
         order.cancel_url = "http://localhost:3000";
         order.error_url = "http://localhost:3000";
         order.pagecon_url = "http://localhost:3000";
         order.request_date = getYYYYMMDDHHMMSS();
-        order.hashkey = "c48e0e2c7d04f0954594f14c7801bd430ca6263e";
+        order.hashkey = "398a58952baf329cac5efbae97ea84ba17028d02";
 
         //チェックサム
         order.sps_hashcode = sha1(order.toString());
@@ -54,7 +54,11 @@
 
       // 日時の取得
       function getYYYYMMDDHHMMSS() {
-        var now = new Date();
+        var now = new Date(
+          new Date().toLocaleString("ja-JP", {
+            timeZone: "Asia/Tokyo",
+          })
+        );
         return (
           now.getFullYear() +
           zeroPadding(now.getMonth() + 1) +
@@ -74,7 +78,7 @@
 
       function feppost(order) {
         var connectUrl =
-          "https://stbfep.sps-system.com/f01/FepBuyInfoReceive.do";
+          "https://stbfep.sps-system.com/Extra/BuyRequestAction.do";
         var form = $("<form></form>", {
           action: connectUrl,
           target: "receiver",
